@@ -1,7 +1,7 @@
 <?php include "comicslib.php"; ?>
 <html>
 <head>
-<title>mincomixsite demo</title>
+<title>krolson comics</title>
 <style>
 	* { margin:0; padding:0; -webkit-text-size-adjust:100%; font-family:Arial, Verdana, serif; }
 	BODY { text-align:center; margin-bottom:30px; }
@@ -18,8 +18,8 @@
 </head>
 <body>
 	<div class="pageHeader">
-		<h1>mincomixsite</h1>
-		<h2>tagline for <a href="https://github.com/codercowboy/mincomixsite">mincomixsite</a> demo</h2>	
+		<h1>Kristina's 15 year work anniversary!</h1>
+		<h2>Here's some comics Kristina made in her early years at the company</h2>	
 	</div>
 
 	<img src="<?= $currentComicImage ?>"/>
