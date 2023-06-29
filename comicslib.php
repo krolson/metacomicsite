@@ -143,7 +143,7 @@
 	//TODO: error if comics directory doesnt exist
 
 	$cm = new ComicManager;
-	$comics = $cm->findComics("comics");
+	$comics = $cm->findComics("content");
 
 	$comicCount = count($comics);
 	$currentComicIndex = getComicIndexFromURLParam($comics);
