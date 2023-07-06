@@ -38,6 +38,7 @@
 	class Comic {
 		public $date = NULL;
 		public $imageFileRelativePath = NULL;
+		public $altTextTitle = NULL;
 	}
 
 	class ComicManager {
@@ -81,6 +82,18 @@
 			return NULL;
 		}
 
+		//returns text content of first found "title.txt" file 
+		function findFirstAltText($directory) {
+			if (!is_dir($directory)) {
+				throw new Exception("Not a directory: " . $directory);
+			}
+			$filePath = $directory . DIRECTORY_SEPARATOR . "title.txt";
+			if(file_exists($filePath)) {
+				return file_get_contents($filePath);
+			}					
+			return NULL;
+		}
+
 		//returns array of Comic objects
 		function findComics($directory) {
 			if (!is_dir($directory)) {
@@ -98,10 +111,12 @@
 				$comicImageFile = $this->findFirstImage($childDirPath);
 				if ($comicImageFile != NULL) {
 					$comicImageFile = $childDirPath . DIRECTORY_SEPARATOR . $comicImageFile;
+					$altTextFileContent = $this->findFirstAltText($childDirPath);
 					//echo "Found: " . $childDir . "  " . $comicImageFile . "<br/>";
 					$comic = new Comic;
 					$comic->date = $childDir;
 					$comic->imageFileRelativePath = $comicImageFile;
+					$comic->altTextTitle = $altTextFileContent;
 					array_push($result, $comic);
 				}
 			}
@@ -143,11 +158,13 @@
 	//TODO: error if comics directory doesnt exist
 
 	$cm = new ComicManager;
+	// $comics = $cm->findComics("comics"); // local version
 	$comics = $cm->findComics("content");
 
 	$comicCount = count($comics);
 	$currentComicIndex = getComicIndexFromURLParam($comics);
 	$currentComicImage = $comics[$currentComicIndex]->imageFileRelativePath;
+	$altText = $comics[$currentComicIndex]->altTextTitle;
 	
 	$previousComicIndex = $currentComicIndex - 1;
 	if ($previousComicIndex < 0) {

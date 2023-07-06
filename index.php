@@ -18,18 +18,26 @@
 </head>
 <body>
 	<div class="pageHeader">
-		<h1>Kristina's 15 year work anniversary!</h1>
-		<h2>Here's some comics Kristina made in her early years at the company</h2>	
+		<h1>Kristina's 15th work anniversary!</h1>
+		<h2>Here are some comics Kristina made in her early years working here</h2>	
 	</div>
-
-	<img src="<?= $currentComicImage ?>"/>
-
+	
 	<div class="links">
 		<a href="?comic=first">&lt;&nbsp;&lt;</a>
 		<a href="?comic=<?= $previousComicDate ?>">&lt;</a>
 		<a href="?comic=<?= $nextComicDate ?>">&gt;</a>
 		<a href="?comic=last">&gt;&nbsp;&gt;</a>
 	</div>
+
+	<img src="<?= $currentComicImage ?>" title="<?= $altText ?>"/>
+	
+	<div class="links">
+		<a href="?comic=first">&lt;&nbsp;&lt;</a>
+		<a href="?comic=<?= $previousComicDate ?>">&lt;</a>
+		<a href="?comic=<?= $nextComicDate ?>">&gt;</a>
+		<a href="?comic=last">&gt;&nbsp;&gt;</a>
+	</div>
+	
 </body>
 
 <!-- Powered by mincomixsite (https://github.com/codercowboy/mincomixsite) -->
