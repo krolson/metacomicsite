@@ -127,7 +127,8 @@
 	function getComicIndexFromURLParam($comics) {
 		$comicCount = count($comics);
 		if (!isset($_GET["comic"])) {
-			return $comicCount - 1;
+			// return $comicCount - 1; // default to latest comic option
+			return 0; // default to first comic option
 		}
 		$urlParamValue = isset($_GET["comic"]) ? $_GET["comic"] : NULL;
 		//echo "url 'comic' param: " . $urlParamIndex . "<br/>";
@@ -152,7 +153,8 @@
 				return $intValue;
 			}
 		}
-		return $comicCount - 1;
+		// return $comicCount - 1; // default to latest comic option
+		return 0; // default to first comic option
 	}
 
 	//TODO: error if comics directory doesnt exist
