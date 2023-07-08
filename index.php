@@ -31,6 +31,11 @@
 
 	<img src="<?= $currentComicImage ?>" title="<?= $altText ?>"/>
 	
+	<details>
+		<summary>hover text</summary>
+		<p><?= $altText ?></p>  
+	</details>
+	
 	<div class="links">
 		<a href="?comic=first">&lt;&nbsp;&lt;</a>
 		<a href="?comic=<?= $previousComicDate ?>">&lt;</a>
