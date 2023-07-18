@@ -160,7 +160,7 @@
 	function OpenConnection()
     	{	        
 		$serverName = "tcp:metacomics.database.windows.net,1433";
-        	$connectionOptions = array("Database"=>"krolson15", 'Authentication'=>'ActiveDirectoryMsi');
+        	$connectionOptions = array("Database"=>"krolson15", "Authentication"=>"ActiveDirectoryMsi", "UID"=>"24d981f4-4534-41bb-9097-9c08e1e41a31");
 
         	$conn = sqlsrv_connect($serverName, $connectionOptions);
         	if($conn == false)
