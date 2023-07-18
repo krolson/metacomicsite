@@ -222,6 +222,7 @@
 	$currentComicIndex = getComicIndexFromURLParam($comics);
 	$currentComicImage = $comics[$currentComicIndex]->imageFileRelativePath;
 	$altText = $comics[$currentComicIndex]->altTextTitle;
+	$currentComicDir = $comics[$currentComicIndex]->date;
 	
 	$previousComicIndex = $currentComicIndex - 1;
 	if ($previousComicIndex < 0) {
