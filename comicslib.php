@@ -157,6 +157,62 @@
 		return 0; // default to first comic option
 	}
 
+	function OpenConnection()
+    	{	        
+		$serverName = "tcp:metacomics.database.windows.net,1433";
+        	$connectionOptions = array("Database"=>"krolson15", 'Authentication'=>'ActiveDirectoryMsi');
+
+        	$conn = sqlsrv_connect($serverName, $connectionOptions);
+        	if($conn == false)
+		    echo(FormatErrors(sqlsrv_errors()));
+
+        	return $conn;
+    	}
+
+	function getComicComments($dirDateID) 
+	{	
+		//TODO: validate you have a dirDateID in expected format
+		// // SQLSRV extension
+		try
+        	{	
+            		$conn = OpenConnection();
+			if($conn == false) {
+				echo("ErrorGettingCxn!");
+			}
+            		$tsql = "SELECT [Name],[Text],[CreatedDate] FROM Comments WHERE PostId = $dirDateID";
+            		$getComments = sqlsrv_query($conn, $tsql);
+            		if ($getComments == FALSE)
+                		return FormatErrors(sqlsrv_errors());
+			print_r("<h3>Comments</h3>");
+			print_r("<hr>");
+            		while($row = sqlsrv_fetch_array($getComments, SQLSRV_FETCH_ASSOC))
+            		{				
+                		echo("<b>$row[Name]</b>  $row[Text]");
+                		echo("<br/>");
+                		print_r("<hr>");
+            		}
+            		sqlsrv_free_stmt($getComments);
+            		sqlsrv_close($conn);
+        	}
+        	catch(Exception $e)
+        	{
+            		echo("Error!");
+       	 	}
+	}
+
+	function FormatErrors( $errors )  
+	{  
+		/* Display errors. */  
+		echo "Error information: <br/>";  
+	
+		foreach ( $errors as $error )  
+		{  
+			echo "SQLSTATE: ".$error['SQLSTATE']."<br/>";  
+			echo "Code: ".$error['code']."<br/>";  
+			echo "Message: ".$error['message']."<br/>";  
+		}  
+	}
+
 	//TODO: error if comics directory doesnt exist
 
 	$cm = new ComicManager;

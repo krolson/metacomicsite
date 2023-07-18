@@ -42,7 +42,22 @@
 		<a href="?comic=<?= $nextComicDate ?>">&gt;</a>
 		<a href="?comic=last">&gt;&nbsp;&gt;</a>
 	</div>
+
+		<?php
+		print_r(getComicComments($currentComicDir));
+	?>
 	
+	<br/>
+	<?php
+		print_r("principal ID: $_SERVER[X_MS_CLIENT_PRINCIPAL_ID]"); 
+	        print_r("principal NAME: $_SERVER[X_MS_CLIENT_PRINCIPAL_NAME]");
+	?>
+	<br/>
+	<?php 		
+		$headers = getallheaders();
+		print_r($headers);
+		print_r($headers["X-MS-CLIENT-PRINCIPAL-NAME"]);
+	?>
 </body>
 
 <!-- Powered by mincomixsite (https://github.com/codercowboy/mincomixsite) -->
