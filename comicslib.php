@@ -158,10 +158,9 @@
 	}
 
 	function OpenConnection()
-    	{	        
-		$serverName = "metacomics.database.windows.net";
-        	$connectionOptions = array("Database"=>"krolson15", "Authentication"=>"ActiveDirectoryMsi"); //, "UID"=>"24d981f4-4534-41bb-9097-9c08e1e41a31");
-
+    	{        	
+		$serverName = getenv('APPSETTING_dbServer');
+        	$connectionOptions = array("Database"=>getenv('APPSETTING_dbName'), "UID"=>getenv('APPSETTING_dbUid'), "pwd"=>getenv('APPSETTING_dbPwd'));
         	$conn = sqlsrv_connect($serverName, $connectionOptions);
         	if($conn == false)
 		    echo(FormatErrors(sqlsrv_errors()));
