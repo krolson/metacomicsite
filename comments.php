@@ -45,17 +45,21 @@
 	}
 
 	function formatCommentAsHtml($cAuthor, $cDate, $cText) {
-		echo('<div class="comment">');
-		
+		// echo("found: $cAuthor $cDate $cText");
+		echo('<div class="comment">');		
 		echo("<leftBlock>");
-		echo("<author>$cAuthor</author>
-			<br/>
-			<commentDate>$cDate</commentDate>");			
-		echo('<form method="POST">
-                <input type=hidden name=postAuthor value="'.$cAuthor.'" >
-				<input type=hidden name=postTime value="'.$cDate.'" >
-                <input type=submit value=Delete name=delete >
-        	</form>');
+		echo("<author>");
+		echo($cAuthor);
+		echo("</author>");
+		echo("<br/>");
+		echo("<commentDate>");
+		echo($cDate);
+		echo("</commentDate>");			
+		echo('<form method="POST">');
+		echo('        <input type=hidden name=postAuthor value="'.$cAuthor.'" >');
+		echo('		  <input type=hidden name=postTime value="'.$cDate.'" >');
+		echo('        <input type=submit value=Delete name=delete >');
+		echo('	</form>');
 		echo("</leftBlock>");
 		echo("<rightBlock>");
 		echo($cText);
