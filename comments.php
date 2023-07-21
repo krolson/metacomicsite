@@ -45,7 +45,10 @@
 	}
 
 	function formatCommentAsHtml($cAuthor, $cDate, $cText) {
-		 echo("found: $cAuthor $cDate $cText");
+		 echo("type: ".gettype($cDate));
+		echo("date");
+		echo($cDate);
+		echo("endDate");
 		echo('<div class="comment">');		
 		echo("<leftBlock>");
 		echo("<author>");
