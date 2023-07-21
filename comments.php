@@ -45,10 +45,11 @@
 	}
 
 	function formatCommentAsHtml($cAuthor, $cDate, $cText) {
-		 echo("type: ".gettype($cDate));
-		echo("date");
-		echo($cDate);
-		echo("endDate");
+		if(!is_string($cDate)) {
+			$cDate = $cDate->format(\DateTime::ISO8601);
+		}
+		echo("type: ".gettype($cDate)); // TEMP
+
 		echo('<div class="comment">');		
 		echo("<leftBlock>");
 		echo("<author>");
