@@ -1,4 +1,4 @@
-<?php include "comicslib.php"; ?>
+<?php include "comicslib.php"; include "comments.php" ?>
 <html>
 <head>
 <title>krolson comics</title>
