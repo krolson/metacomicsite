@@ -3,7 +3,6 @@
 	function OpenConnection()
     	{        	
 		  $serverName = getenv('APPSETTING_dbServer');
-        // $connectionOptions = array("Database"=>"krolson15", "UID"=>"metaAdmin", "pwd"=>"","ReturnDatesAsStrings"=>true);	// Local testing
         	$connectionOptions = array("Database"=>getenv('APPSETTING_dbName'), "UID"=>getenv('APPSETTING_dbUid'), "pwd"=>getenv('APPSETTING_dbPwd'));
         	$conn = sqlsrv_connect($serverName, $connectionOptions);
         	if($conn == false)
