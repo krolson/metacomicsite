@@ -12,8 +12,15 @@
 	.links { display:block; margin-top:30px; }
 	.links A { width:75px; height:50px; background-color:black; color:white; display:inline-block;
 		border-color:gray; text-decoration:none; margin:25px; font-size:2em; 
-		font-weight:bold; padding-top:0.5em; }
-	.links A:hover { color:gray; }
+		font-weight:bold; padding-top:0.5em; border-radius:4px; }
+	.links A:hover { color:gray; }	
+	.comments { margin:auto; max-width:800px }	
+	.comment { display:block; max-width:700px; text-align:left; padding-bottom:15px; break-after:always}
+	.comment leftBlock {display:inline-block; width:30%}
+	.comment rightBlock {float:right; width:70%}
+	.comment author {font-weight:bold}
+	.comment commentDate {font-size:x-small;}
+	.comment deletebutton { background-color:black; color:white; text-align:center; width:75px; padding-top:1em; padding-bottom:1em;}
 </style>
 </head>
 <body>
@@ -43,21 +50,19 @@
 		<a href="?comic=last">&gt;&nbsp;&gt;</a>
 	</div>
 
+	<div class="comments">		
 		<?php
-		print_r(getComicComments($currentComicDir));
-	?>
+			print_r(getComicComments($currentComicDir));
+		?>
+		<form action="" method="post">
+			<textarea id="commentbox" name="commentbox" rows="8" cols="100" maxlength="2000" placeholder="New comment..." border-radius="4px"> 
+			</textarea>	
+			<br/>	
+			<input type="submit" name="submit" value="Post Comment" />
+		</form>	
+	</div>
 	
 	<br/>
-	<?php
-		print_r("principal ID: $_SERVER[X_MS_CLIENT_PRINCIPAL_ID]"); 
-	        print_r("principal NAME: $_SERVER[X_MS_CLIENT_PRINCIPAL_NAME]");
-	?>
-	<br/>
-	<?php 		
-		$headers = getallheaders();
-		print_r($headers);
-		print_r($headers["X-MS-CLIENT-PRINCIPAL-NAME"]);
-	?>
 </body>
 
 <!-- Powered by mincomixsite (https://github.com/codercowboy/mincomixsite) -->
