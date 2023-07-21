@@ -138,6 +138,7 @@
 
 	$headers = array_change_key_case(getallheaders(), CASE_UPPER);	
 	$loggedInUserName = $headers["X-MS-CLIENT-PRINCIPAL-NAME"];
+        echo("Hi $loggedInUserName!");
 	// $loggedInUserName = "person@microsoft.com"; // only when local testing
 	$userAlias = strtok($loggedInUserName, '@');
 	if(empty($userAlias))
