@@ -41,7 +41,7 @@
 		}
 	}
 
-	function formatCommentAsHtml($cAuthor, $cDate, $cText) {
+	function formatCommentAsHtml($cAuthor, $cDate, $cText, $currAuthor) {
 		if(!is_string($cDate)) {
 			$cDate = $cDate->format('Y-m-d H:i:s.v');
 		}
