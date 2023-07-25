@@ -15,12 +15,16 @@
 		font-weight:bold; padding-top:0.5em; border-radius:4px; }
 	.links A:hover { color:gray; }	
 	.comments { margin:auto; max-width:800px }	
-	.comment { display:block; max-width:700px; text-align:left; padding-bottom:15px; break-after:always}
-	.comment leftBlock {display:inline-block; width:30%}
-	.comment rightBlock {float:right; width:70%}
+	.comment { display:block; overflow:hidden; max-width:800px; text-align:left; padding-bottom:15px; break-after:always}
+	.comment leftBlock {display:inline-block; width:78%; padding-bottom:500em;margin-bottom:-500em; }
+	.comment rightBlock {float:right; width:20%; padding-bottom:500em;margin-bottom:-500em;}
 	.comment author {font-weight:bold}
 	.comment commentDate {font-size:x-small;}
 	.comment deletebutton { background-color:black; color:white; text-align:center; width:75px; padding-top:1em; padding-bottom:1em;}
+	input[type=submit] { background-color: #lightgray; color:303030;
+		border-color:gray; border-width:1px; padding: 8px 16px; text-decoration: none;
+		margin: 4px 2px; border-radius:4px; cursor: pointer; }
+	input:hover {background-color:505050; color:lightgray}
 </style>
 </head>
 <body>
@@ -50,16 +54,25 @@
 		<a href="?comic=last">&gt;&nbsp;&gt;</a>
 	</div>
 
-	<div class="comments">		
+	<div class="comments">	
+		<h3>Comments</h3>
+		<hr style="margin:5px">	
 		<?php
-			print_r(getComicComments($currentComicDir));
+			getComicComments($currentComicDir, $userAlias);
 		?>
+		<br/>
+		<div class="comment">
 		<form action="" method="post">
-			<textarea id="commentbox" name="commentbox" rows="8" cols="100" maxlength="2000" placeholder="New comment..." border-radius="4px"> 
-			</textarea>	
-			<br/>	
-			<input type="submit" name="submit" value="Post Comment" />
-		</form>	
+			<leftBlock>
+				<textarea id="commentbox" name="commentbox" rows="8" style="width:95%; max-width:95%; top:0" maxlength="2000" placeholder="New comment..." border-radius="4px"></textarea>	
+			</leftBlock>
+			<rightBlock>
+				<author><?= $userAlias ?></author>
+				<br/>
+				<input type="submit" name="submit" value="Post" />				
+			</rightBlock>			
+		</form>			
+		</div>
 	</div>
 	
 	<br/>

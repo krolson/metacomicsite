@@ -2,7 +2,7 @@
 
 	function OpenConnection()
     	{        	
-		  $serverName = getenv('APPSETTING_dbServer');
+		$serverName = getenv('APPSETTING_dbServer');
         	$connectionOptions = array("Database"=>getenv('APPSETTING_dbName'), "UID"=>getenv('APPSETTING_dbUid'), "pwd"=>getenv('APPSETTING_dbPwd'));
         	$conn = sqlsrv_connect($serverName, $connectionOptions);
         	if($conn == false)
@@ -11,37 +11,34 @@
         	return $conn;
     	}
 
-	function getComicComments($dirDateID) {	
+	function getComicComments($dirDateID, $currUser) {	
 		//TODO: validate you have a dirDateID in expected format
 
 		// // SQLSRV extension
 		try
-        {
-            $conn = OpenConnection();
+		{
+			$conn = OpenConnection();
 			if($conn == false) {
 				echo("ErrorGettingCxn!");
 			}
 			$commenttsql = "SELECT [Name],[Text],[CreatedDate] FROM Comments WHERE PostId = ?";
 			$commentparams = array($dirDateID);  			
-      $getComments = sqlsrv_query($conn, $commenttsql, $commentparams);
-      if ($getComments == FALSE) {							
-           return FormatErrors(sqlsrv_errors());
+			$getComments = sqlsrv_query($conn, $commenttsql, $commentparams);
+			if ($getComments == FALSE) {							
+				return FormatErrors(sqlsrv_errors());
 			}
-			
-			print_r("<h3>Comments</h3>");
-			print_r("<hr>");
 
-      while($row = sqlsrv_fetch_array($getComments, SQLSRV_FETCH_ASSOC))
-      {					
-			  	formatCommentAsHtml($row['Name'], $row['CreatedDate'], $row['Text']);
-      }
-      sqlsrv_free_stmt($getComments);
-      sqlsrv_close($conn);
-      }
-      catch(Exception $e)
-      {
-          echo("Error!");
-      }
+			while($row = sqlsrv_fetch_array($getComments, SQLSRV_FETCH_ASSOC))
+			{					
+				formatCommentAsHtml($row['Name'], $row['CreatedDate'], $row['Text'], $currUser);
+			}
+			sqlsrv_free_stmt($getComments);
+			sqlsrv_close($conn);
+		}
+		catch(Exception $e)
+		{
+			echo("Error!");
+		}
 	}
 
 	function formatCommentAsHtml($cAuthor, $cDate, $cText) {
@@ -49,32 +46,37 @@
 			$cDate = $cDate->format('Y-m-d H:i:s.v');
 		}
 		
+		 // $cDate is string in local test env, but objectdate on Azure site
 		echo('<div class="comment">');		
 		echo("<leftBlock>");
+		echo '<div style="white-space:pre-wrap">' . htmlspecialchars($cText) . '</div>';	
+		echo("<br/>");
+		echo("</leftBlock>");
+		echo("<rightBlock>");
 		echo("<author>");
-		echo($cAuthor);
+		echo(htmlspecialchars($cAuthor));
 		echo("</author>");
 		echo("<br/>");
 		echo("<commentDate>");
-		echo($cDate);
-		echo("</commentDate>");			
-		echo('<form method="POST">');
-		echo('        <input type=hidden name=postAuthor value="'.$cAuthor.'" >');
-		echo('		  <input type=hidden name=postTime value="'.$cDate.'" >');
-		echo('        <input type=submit value=Delete name=delete >');
-		echo('	</form>');
-		echo("</leftBlock>");
-		echo("<rightBlock>");
-		echo($cText);
+		echo(htmlspecialchars($cDate));		
+		echo("</commentDate>");	
+		if($cAuthor === $currAuthor)	{	
+			echo('<form method="POST">');
+			echo('        <input type=hidden name=postAuthor value="'.$cAuthor.'" >');
+			echo('		  <input type=hidden name=postTime value="'.$cDate.'" >');
+			echo('        <input type=submit value=Delete name=delete >');
+			echo('</form>');
+		}	
 		echo("</rightBlock>");
-		echo("<br/>");
 		echo("</div>");
+		echo('<hr style="height:2px;border-width:0;background-color:whitesmoke">');
+		echo("<br/>");
 	}
 
 	function addComment($dirDateID, $Comment, $User) {							
 		try
-        {
-            $conn = OpenConnection();
+		{
+			$conn = OpenConnection();
 			if($conn == false) {
 				echo("ErrorGettingCxn!");
 			}
@@ -95,11 +97,11 @@
 			sqlsrv_free_stmt( $insertComment );  
 			sqlsrv_close($conn);
 			echo "<h4 align='center'>(Comment submitted)</h4>";
-        }
-        catch(Exception $e)
-        {
-            echo("Error!");
-        }	  
+		}
+		catch(Exception $e)
+		{
+			echo("Error!");
+		}	  
 	}
 
 	function deleteComment($dirDateID, $CommentDate, $User) {							
@@ -143,9 +145,9 @@
 	}	
 
 	$headers = array_change_key_case(getallheaders(), CASE_UPPER);	
-	$loggedInUserName = $headers["X-MS-CLIENT-PRINCIPAL-NAME"];
-        echo("Hi $loggedInUserName!");
+	$loggedInUserName = $headers["X-MS-CLIENT-PRINCIPAL-NAME"];        
 	// $loggedInUserName = "person@microsoft.com"; // only when local testing
+	// echo("Hi $loggedInUserName!");
 	$userAlias = strtok($loggedInUserName, '@');
 	if(empty($userAlias))
 	{
