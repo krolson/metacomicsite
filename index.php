@@ -6,12 +6,12 @@
 	* { margin:0; padding:0; -webkit-text-size-adjust:100%; font-family:Arial, Verdana, serif; }
 	BODY { text-align:center; margin-bottom:30px; }
 	IMG { max-width:800px; }
-	.pageHeader { margin-left:auto; margin-right:auto; text-align:center; margin-bottom:30px; }
-	.pageHeader H1 { font-size:6em; margin-top:10px; }
-	.pageHeader H2 { font-size:2em; margin-bottom:20px; margin-top:10px; }
+.pageHeader { margin-left:auto; margin-right:auto; text-align:center; margin-bottom:30px; }
+	.pageHeader H1 { font-size:5em; margin-top:10px; }
+	.pageHeader H2 { font-size:1.5em; margin-bottom:10px; margin-top:10px; }
 	.links { display:block; margin-top:30px; }
 	.links A { width:75px; height:50px; background-color:black; color:white; display:inline-block;
-		border-color:gray; text-decoration:none; margin:25px; font-size:2em; 
+		border-color:gray; text-decoration:none; margin:10px 25px 10px 25px; font-size:2em; 
 		font-weight:bold; padding-top:0.5em; border-radius:4px; }
 	.links A:hover { color:gray; }	
 	.comments { margin:auto; max-width:800px }	
