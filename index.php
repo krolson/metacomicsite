@@ -6,7 +6,7 @@
 	* { margin:0; padding:0; -webkit-text-size-adjust:100%; font-family:Arial, Verdana, serif; }
 	BODY { text-align:center; margin-bottom:30px; }
 	IMG { max-width:800px; }
-.pageHeader { margin-left:auto; margin-right:auto; text-align:center; margin-bottom:30px; }
+	.pageHeader { margin-left:auto; margin-right:auto; text-align:center; margin-bottom:30px; }
 	.pageHeader H1 { font-size:5em; margin-top:10px; }
 	.pageHeader H2 { font-size:1.5em; margin-bottom:10px; margin-top:10px; }
 	.links { display:block; margin-top:30px; }
@@ -64,7 +64,7 @@
 		<div class="comment">
 		<form action="" method="post">
 			<leftBlock>
-				<textarea id="commentbox" name="commentbox" rows="8" style="width:95%; max-width:95%; top:0" maxlength="2000" placeholder="New comment..." border-radius="4px"></textarea>	
+				<textarea id="commentbox" name="commentbox" rows="8" style="width:98%; max-width:98%; top:0" maxlength="2000" placeholder="New comment..." border-radius="4px"></textarea>	
 			</leftBlock>
 			<rightBlock>
 				<author><?= $userAlias ?></author>
