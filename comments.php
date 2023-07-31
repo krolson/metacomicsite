@@ -19,7 +19,7 @@
 		{
 			$conn = OpenConnection();
 			if($conn == false) {
-				echo("ErrorGettingCxn!");
+				echo("<!-- ErrorGettingCxn! -->");
 			}
 			$commenttsql = "SELECT [Name],[Text],[CreatedDate] FROM Comments WHERE PostId = ?";
 			$commentparams = array($dirDateID);  			
@@ -78,7 +78,7 @@
 		{
 			$conn = OpenConnection();
 			if($conn == false) {
-				echo("ErrorGettingCxn!");
+				echo("<!-- ErrorGettingCxn! -->");
 			}
 			/*Prepend the review so it can be opened as a stream.*/  
 			$comments = "data://text/plain,".$Comment;  
@@ -109,7 +109,7 @@
         {
             $conn = OpenConnection();
 			if($conn == false) {
-				echo("ErrorGettingCxn!");
+				echo("<!-- ErrorGettingCxn! -->");
 			}
 			$deletetsql = "DELETE TOP (1) FROM Comments WHERE PostID = ? AND Name = ? AND CreatedDate = ?";		
 			$deleteparams = array($dirDateID, $User, $CommentDate);  
@@ -133,7 +133,9 @@
 
 	function FormatErrors( $errors )  
 	{  
-		/* Display errors. */  
+		/* Display generic message, display error detail inpage source as comment. */  
+		echo "Issue with DB connection right now, sorry";
+		echo "<!-- ";
 		echo "Error information: <br/>";  
 	
 		foreach ( $errors as $error )  
@@ -142,6 +144,7 @@
 			echo "Code: ".$error['code']."<br/>";  
 			echo "Message: ".$error['message']."<br/>";  
 		}  
+		echo " -->"; 
 	}	
 
 	$headers = array_change_key_case(getallheaders(), CASE_UPPER);	
@@ -166,6 +169,11 @@
 
 	if(isset($_POST["delete"]))
 	{	 	
-		deleteComment($currentComicDir, $_POST["postTime"], $_POST["postAuthor"]);
+		if($_POST["postAuthor"] === $userAlias)
+		{
+			deleteComment($currentComicDir, $_POST["postTime"], $_POST["postAuthor"]);
+		} else {
+			echo "<h4 align='center'>(sorry, only comment author can delete their comment)</h4>";
+		}
 	}
 ?>
