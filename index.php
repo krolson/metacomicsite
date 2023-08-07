@@ -7,13 +7,13 @@
 	BODY { text-align:center; margin-bottom:30px; }
 	IMG { max-width:800px; }
 	.pageHeader { margin-left:auto; margin-right:auto; text-align:center; margin-bottom:30px; }
-	.pageHeader H1 { font-size:5em; margin-top:10px; }
-	.pageHeader H2 { font-size:1.5em; margin-bottom:10px; margin-top:10px; }
+	.pageHeader H1 { font-size:4em; margin-top:10px; }
+	.pageHeader H2 { font-size:1.2em; margin-bottom:10px; margin-top:10px; }
 	.links { display:block; margin-top:30px; }
 	.links A { width:75px; height:50px; background-color:black; color:white; display:inline-block;
 		border-color:gray; text-decoration:none; margin:10px 25px 10px 25px; font-size:2em; 
 		font-weight:bold; padding-top:0.5em; border-radius:4px; }
-	.links A:hover { color:gray; }	
+	.links A:hover { color:gray; }
 	.comments { margin:auto; max-width:800px }	
 	.comment { display:block; overflow:hidden; max-width:800px; text-align:left; padding-bottom:15px; break-after:always}
 	.comment leftBlock {display:inline-block; width:78%; padding-bottom:500em;margin-bottom:-500em; }
@@ -30,14 +30,14 @@
 <body>
 	<div class="pageHeader">
 		<h1>Kristina's 15th work anniversary!</h1>
-		<h2>Here are some comics Kristina made in her early years working here</h2>	
+		<h2>Here are some comics Kristina made when she started working here</h2>
 	</div>
 	
 	<div class="links">
-		<a href="?comic=first">&lt;&nbsp;&lt;</a>
-		<a href="?comic=<?= $previousComicDate ?>">&lt;</a>
-		<a href="?comic=<?= $nextComicDate ?>">&gt;</a>
-		<a href="?comic=last">&gt;&nbsp;&gt;</a>
+		<a href="?comic=first"                     <?php if($previousComicIndex === $currentComicIndex) { echo( 'style="color:gray"'); }?> >&lt;&nbsp;&lt;</a>
+		<a href="?comic=<?= $previousComicDate ?>" <?php if($previousComicIndex === $currentComicIndex) { echo( 'style="color:gray"'); }?> >&lt;</a>
+		<a href="?comic=<?= $nextComicDate ?>"     <?php if($nextComicIndex === $currentComicIndex)     { echo( 'style="color:gray"'); }?> >&gt;</a>
+		<a href="?comic=last"                      <?php if($nextComicIndex === $currentComicIndex)     { echo( 'style="color:gray"'); }?> >&gt;&nbsp;&gt;</a>
 	</div>
 
 	<img src="<?= $currentComicImage ?>" title="<?= $altText ?>"/>
@@ -48,10 +48,10 @@
 	</details>
 	
 	<div class="links">
-		<a href="?comic=first">&lt;&nbsp;&lt;</a>
-		<a href="?comic=<?= $previousComicDate ?>">&lt;</a>
-		<a href="?comic=<?= $nextComicDate ?>">&gt;</a>
-		<a href="?comic=last">&gt;&nbsp;&gt;</a>
+		<a href="?comic=first"                     <?php if($previousComicIndex === $currentComicIndex) { echo( 'style="color:gray"'); }?> >&lt;&nbsp;&lt;</a>
+		<a href="?comic=<?= $previousComicDate ?>" <?php if($previousComicIndex === $currentComicIndex) { echo( 'style="color:gray"'); }?> >&lt;</a>
+		<a href="?comic=<?= $nextComicDate ?>"     <?php if($nextComicIndex === $currentComicIndex)     { echo( 'style="color:gray"'); }?> >&gt;</a>
+		<a href="?comic=last"                      <?php if($nextComicIndex === $currentComicIndex)     { echo( 'style="color:gray"'); }?> >&gt;&nbsp;&gt;</a>
 	</div>
 
 	<div class="comments">	
