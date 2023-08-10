@@ -25,6 +25,10 @@
 		border-color:gray; border-width:1px; padding: 8px 16px; text-decoration: none;
 		margin: 4px 2px; border-radius:4px; cursor: pointer; }
 	input:hover {background-color:505050; color:lightgray}
+	.jumpToLinks { margin:auto; max-width:800px }
+	.jumpToLinks A {}
+	.jumpToLinks A.current {color:orangered;}
+	.jumpToLinks A:hover { color:gray; }
 </style>
 </head>
 <body>
@@ -73,6 +77,14 @@
 			</rightBlock>			
 		</form>			
 		</div>
+	</div>
+
+	<div class="jumpToLinks">
+	<h3>Links</h3>
+		<hr style="margin:5px">		
+		<?php
+			getComicLinks($currentComicDir);
+		?>		
 	</div>
 	
 	<br/>
