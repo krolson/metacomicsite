@@ -131,6 +131,44 @@
         }	  
 	}
 
+	function getComicLinks($dirDateID) {	
+		try
+		{
+			$conn = OpenConnection();
+			if($conn == false) {
+				echo("<!-- ErrorGettingCxn! -->");
+			}
+			$posttsql = "SELECT [PostID],[Name] FROM Posts ORDER BY PostID";			  			
+			$getPosts = sqlsrv_query($conn, $posttsql);
+			if ($getPosts == FALSE) {							
+				return FormatErrors(sqlsrv_errors());
+			}
+			while($row = sqlsrv_fetch_array($getPosts, SQLSRV_FETCH_ASSOC))
+			{					
+				formatLinkAsHtml($row['PostID'], $row['Name'], $dirDateID);
+			}
+			sqlsrv_free_stmt($getPosts);
+			sqlsrv_close($conn);
+		}
+		catch(Exception $e)
+		{
+			echo("Error!");
+		}
+	}
+
+	function formatLinkAsHtml($pID, $pFileName, $currPostID) {
+		$fileTitle = substr($pFileName, 0, (strrpos($pFileName, ".")));
+		echo('        <a href="?comic='.$pID.'">');
+		if($pID == $currPostID)	{	
+			echo('<span style="font-size:100%;color:orange;">&starf;</span>');
+		}
+		echo($fileTitle);
+		if($pID == $currPostID)	{	
+			echo('<span style="font-size:100%;color:orange;">&starf;</span>');
+		}
+		echo('</a><br/>');		
+	}
+
 	function FormatErrors( $errors )  
 	{  
 		/* Display generic message, display error detail inpage source as comment. */  
